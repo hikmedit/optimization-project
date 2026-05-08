@@ -1,1 +1,14 @@
 .DS_Store
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+data/raw/*.xlsx
+data/raw/*.geojson
+data/processed/*.csv
+report/*.aux
+report/*.bbl
+report/*.blg
+report/*.log
+report/*.out
+report/*.synctex.gz
+
