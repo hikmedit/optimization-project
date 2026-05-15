@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 import json
+import math
 from urllib.error import URLError
 from urllib.request import Request, urlopen
 
@@ -191,8 +192,20 @@ def load_arrival_minutes(path: str | Path) -> float:
     preferred = ["Tüm İtfai Olaylar", "Yanginlar", "Yangınlar"]
     for column in preferred:
         if column in raw.columns:
-            value = as_float(row[column])
-            return value * 24.0 if 0 < value < 1 else value
+            val = row[column]
+            if pd.isna(val):
+                continue
+            import datetime
+            if isinstance(val, datetime.time):
+                if val.hour > 0 and val.second == 0:
+                    return float(val.hour) + float(val.minute) / 60.0
+                return float(val.minute) + float(val.second) / 60.0
+            if isinstance(val, str) and ":" in val:
+                parts = val.split(":")
+                return float(parts[0]) + float(parts[1]) / 60.0
+            value = as_float(val)
+            if not math.isnan(value):
+                return value * 24.0 if 0 < value < 1 else value
     numeric = pd.to_numeric(row.drop(labels=["Yil"], errors="ignore"), errors="coerce").dropna()
     if numeric.empty:
         raise ValueError("arrival-time file has no numeric calibration value")
