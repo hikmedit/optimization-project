@@ -9,14 +9,30 @@ The implementation follows the instructor feedback:
 - If road routing is unavailable, the project uses one calibrated geometric time proxy throughout, not a mix of road time and raw Euclidean distance.
 - The recommended model includes an equity refinement that minimizes the worst district response time within a 2% weighted-average response-time tolerance.
 
+## 🆕 Advanced Optimization Methods
+
+Three advanced optimization techniques have been added:
+
+1. **Lagrangian Relaxation** - Provides optimality bounds and quality guarantees
+2. **Hierarchical Facility Location** - Models different station types with budget constraints  
+3. **ML-Enhanced Optimization** - Uses machine learning for demand prediction and warm-starting
+
+See [ADVANCED_METHODS.md](ADVANCED_METHODS.md) for detailed documentation.
+
 ## Structure
 
 - `notebooks/istanbul_fire_station_expansion.ipynb` - main formatted Jupyter Notebook.
 - `src/istanbul_fire_opt/` - reusable data, travel-time, optimization, heuristic, continuous-refinement, and visualization code.
+  - `lagrangian.py` - Lagrangian Relaxation implementation
+  - `hierarchical.py` - Hierarchical Facility Location models
+  - `ml_optimization.py` - Machine Learning enhanced optimization
 - `scripts/run_pipeline.py` - command-line experiment runner.
 - `scripts/generate_report_assets.py` - generates report CSV tables and figures.
+- `scripts/demo_advanced_methods.py` - demonstration of advanced optimization methods.
 - `report/main.tex` - IEEE conference report source.
 - `tests/test_core.py` - core optimization unit tests.
+- `tests/test_advanced_methods.py` - advanced methods unit tests.
+- `ADVANCED_METHODS.md` - detailed documentation for advanced optimization techniques.
 
 ## Quick Start
 

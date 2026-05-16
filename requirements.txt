@@ -11,4 +11,5 @@ pulp
 folium
 osmnx
 jupyter
+scikit-learn
 
